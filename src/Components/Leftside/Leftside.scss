@@ -1,0 +1,29 @@
+.leftSide {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .calculator-wrapper {
+        width: 90%;
+        height: 90%;
+
+        display: flex;
+
+        .calculator-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .calculator-title {
+                font-size: 16px;
+            }
+
+            .clear-button {
+                color: blue;
+                text-decoration-line: underline;
+            }
+        }
+    }
+}
