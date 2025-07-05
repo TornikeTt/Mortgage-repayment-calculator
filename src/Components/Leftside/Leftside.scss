@@ -78,10 +78,6 @@ form {
             border: none;
             outline: none;
 
-            // Target number inputs to remove default spinner arrows
-            // Removes spinner in Firefox
-            -moz-appearance: textfield;
-
             // Removes spinner in Chrome, Safari, and Edge
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button {
