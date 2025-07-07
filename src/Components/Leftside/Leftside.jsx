@@ -2,6 +2,7 @@ import { FaPoundSign } from "react-icons/fa";
 import calculator from "../../assets/images/icon-calculator.svg";
 import "./Leftside.scss";
 import MortgageDetailsBlock from "./MortgageDetailsBlock";
+import MortgageType from "./MortgageType";
 
 function Leftside() {
     return (
@@ -39,6 +40,18 @@ function Leftside() {
                             class_name="interestRate"
                             label_text="Interest Rate"
                             input_description="%"
+                        />
+                    </div>
+
+                    <div className="MortgageType">
+                        <p>Mortgage Type</p>
+                        <MortgageType
+                            label_text="Repayment"
+                            name="mortgageType"
+                        />
+                        <MortgageType
+                            label_text="Interest Only"
+                            name="mortgageType"
                         />
                     </div>
                 </form>
