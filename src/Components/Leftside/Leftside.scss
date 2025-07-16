@@ -8,7 +8,7 @@
 
     .calculator-wrapper {
         width: 90%;
-        height: 90%;
+        height: 93%;
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -190,5 +190,32 @@ form {
         label {
             font-weight: 600;
         }
+    }
+}
+
+.mortgage-btn {
+    margin-top: 20px;
+    width: 70%;
+    height: 37px;
+
+    background-color: hsl(61, 70%, 52%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    gap: 5px;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    img {
+        width: 20px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 600;
     }
 }

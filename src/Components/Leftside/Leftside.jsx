@@ -54,6 +54,11 @@ function Leftside() {
                             name="mortgageType"
                         />
                     </div>
+
+                    <button className="mortgage-btn">
+                        <img src={calculator} />
+                        <p>Calculate Repayments</p>
+                    </button>
                 </form>
             </div>
         </div>
