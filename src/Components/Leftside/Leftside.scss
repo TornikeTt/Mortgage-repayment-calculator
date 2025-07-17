@@ -192,7 +192,7 @@ form {
         gap: 10px;
         cursor: pointer;
 
-        &:focus {
+        &:focus-within {
             border: 1px solid hsl(61, 70%, 52%);
             background-color: rgb(255, 246, 246);
         }
@@ -201,7 +201,7 @@ form {
             margin-left: 10px;
         }
 
-        label {
+        span {
             font-weight: 600;
         }
     }
