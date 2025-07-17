@@ -42,7 +42,12 @@
 
 form {
     width: 100%;
+    height: 100%;
     margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .mortgageAmount-container {
@@ -90,12 +95,23 @@ form {
                 margin: 0;
             }
         }
+
+        &:hover {
+            border-color: hsl(61, 70%, 52%);
+        }
+
+        &:hover .input-icon-wrapper {
+            background-color: hsl(61, 70%, 52%);
+        }
+
+        &:hover .input-icon {
+            color: black;
+        }
     }
 }
 
 .mortgage-details {
     width: 100%;
-    margin-top: 20px;
 
     display: flex;
     justify-content: space-between;
@@ -157,8 +173,6 @@ form {
 }
 
 .MortgageType {
-    margin-top: 20px;
-
     p {
         font-size: 14px;
         color: hsl(200, 26%, 54%);
@@ -194,7 +208,6 @@ form {
 }
 
 .mortgage-btn {
-    margin-top: 20px;
     width: 70%;
     height: 37px;
 
