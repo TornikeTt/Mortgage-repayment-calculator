@@ -56,4 +56,14 @@
             color: black;
         }
     }
+
+    .error {
+        border: 1px solid hsl(4, 69%, 50%);
+        .input-icon-wrapper {
+            background-color: hsl(4, 69%, 50%);
+            .input-icon {
+                color: white;
+            }
+        }
+    }
 }

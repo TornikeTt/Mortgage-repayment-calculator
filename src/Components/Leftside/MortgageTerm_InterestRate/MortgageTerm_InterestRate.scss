@@ -13,6 +13,7 @@
             color: hsl(200, 26%, 54%);
         }
 
+        .input-wrapper,
         .input-wrapper {
             margin-top: 10px;
             width: 100%;
@@ -53,6 +54,15 @@
                     -webkit-appearance: none;
                     margin: 0;
                 }
+            }
+        }
+
+        .error {
+            border: 1px solid hsl(4, 69%, 50%);
+            .input-description {
+                background-color: hsl(4, 69%, 50%);
+
+                color: white;
             }
         }
     }

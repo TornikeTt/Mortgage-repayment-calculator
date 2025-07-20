@@ -8,7 +8,7 @@ function Leftside({ isInvalid, setIsInvalid }) {
     const handleInputFields = (e) => {
         e.preventDefault();
 
-        let radioChecks = [];
+        let radioCheckedStatus = [];
 
         for (let i = 0; i < e.target.length; i++) {
             const input = e.target[i];
@@ -22,9 +22,11 @@ function Leftside({ isInvalid, setIsInvalid }) {
             }
 
             if (type === "radio") {
-                radioChecks.push(checked);
+                radioCheckedStatus.push(checked);
 
-                let isAnyChecked = radioChecks.some((each) => each === true);
+                let isAnyChecked = radioCheckedStatus.some(
+                    (each) => each === true
+                );
 
                 setIsInvalid((prev) => ({
                     ...prev,
@@ -45,9 +47,16 @@ function Leftside({ isInvalid, setIsInvalid }) {
                 </div>
 
                 <form onSubmit={handleInputFields}>
-                    <MortgageAmount />
-                    <MortgageTerm_InterestRate />
-                    <MortgageType />
+                    <MortgageAmount
+                        MortgageAmount_input_status={isInvalid.MortgageAmount}
+                    />
+                    <MortgageTerm_InterestRate
+                        MortgageTerm_input_status={isInvalid.MortgageTerm}
+                        InterestRate_input_status={isInvalid.InterestRate}
+                    />
+                    <MortgageType
+                        MortgageType_input_status={isInvalid.MortgageType}
+                    />
 
                     <button className="mortgage-btn">
                         <img src={calculator} />
