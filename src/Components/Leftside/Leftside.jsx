@@ -1,10 +1,39 @@
-import { FaPoundSign } from "react-icons/fa";
 import calculator from "../../assets/images/icon-calculator.svg";
 import "./Leftside.scss";
-import MortgageDetailsBlock from "./MortgageDetailsBlock";
-import MortgageType from "./MortgageType";
+import MortgageAmount from "./mortgageAmount/mortgageAmount";
+import MortgageTerm_InterestRate from "./MortgageTerm_InterestRate/MortgageTerm_InterestRate";
+import MortgageType from "./MortgageType/MortgageType";
 
-function Leftside() {
+function Leftside({ isInvalid, setIsInvalid }) {
+    const handleInputFields = (e) => {
+        e.preventDefault();
+
+        let radioChecks = [];
+
+        for (let i = 0; i < e.target.length; i++) {
+            const input = e.target[i];
+            const { type, name, value, checked } = input;
+
+            if (type === "number") {
+                setIsInvalid((prev) => ({
+                    ...prev,
+                    [name]: value === "" ? false : true,
+                }));
+            }
+
+            if (type === "radio") {
+                radioChecks.push(checked);
+
+                let isAnyChecked = radioChecks.some((each) => each === true);
+
+                setIsInvalid((prev) => ({
+                    ...prev,
+                    [name]: isAnyChecked,
+                }));
+            }
+        }
+    };
+
     return (
         <div className="leftSide">
             <div className="calculator-wrapper">
@@ -15,45 +44,10 @@ function Leftside() {
                     </button>
                 </div>
 
-                <form>
-                    <div className="mortgageAmount-container">
-                        <label htmlFor="mortgageAmount-input">
-                            Mortgage Amount
-                        </label>
-
-                        <div className="mortgageAmount-input-wrapper">
-                            <div className="input-icon-wrapper">
-                                <FaPoundSign className="input-icon" />
-                            </div>
-                            <input id="mortgageAmount-input" type="number" />
-                        </div>
-                    </div>
-
-                    <div className="mortgage-details">
-                        <MortgageDetailsBlock
-                            class_name="MortgageTerm"
-                            label_text="Mortgage Term"
-                            input_description="years"
-                        />
-
-                        <MortgageDetailsBlock
-                            class_name="interestRate"
-                            label_text="Interest Rate"
-                            input_description="%"
-                        />
-                    </div>
-
-                    <div className="MortgageType">
-                        <p>Mortgage Type</p>
-                        <MortgageType
-                            label_text="Repayment"
-                            name="mortgageType"
-                        />
-                        <MortgageType
-                            label_text="Interest Only"
-                            name="mortgageType"
-                        />
-                    </div>
+                <form onSubmit={handleInputFields}>
+                    <MortgageAmount />
+                    <MortgageTerm_InterestRate />
+                    <MortgageType />
 
                     <button className="mortgage-btn">
                         <img src={calculator} />

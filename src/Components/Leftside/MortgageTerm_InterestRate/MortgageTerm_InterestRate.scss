@@ -1,0 +1,59 @@
+.MortgageTerm_InterestRate-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    .MortgageTerm-wrapper,
+    .InterestRate-wrapper {
+        width: 47%;
+
+        label {
+            font-size: 14px;
+            color: hsl(200, 26%, 54%);
+        }
+
+        .input-wrapper {
+            margin-top: 10px;
+            width: 100%;
+            height: 40px;
+            position: relative;
+            border: 1px solid hsl(200, 26%, 54%);
+
+            overflow: hidden;
+            border-radius: 5px;
+
+            .input-description {
+                position: absolute;
+                right: 0;
+                width: 60px;
+                height: 100%;
+                background-color: hsl(202, 86%, 94%);
+                color: hsl(200, 26%, 54%);
+                font-weight: bold;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 14px;
+            }
+
+            input {
+                width: 100%;
+                height: 100%;
+                padding-left: 10px;
+                border: none;
+                outline: none;
+
+                padding-right: 70px;
+                font-weight: bold;
+                // Removes spinner in Chrome, Safari, and Edge
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

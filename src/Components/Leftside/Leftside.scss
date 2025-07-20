@@ -50,163 +50,6 @@ form {
     justify-content: space-between;
 }
 
-.mortgageAmount-container {
-    label {
-        font-size: 14px;
-        color: hsl(200, 26%, 54%);
-    }
-
-    .mortgageAmount-input-wrapper {
-        margin-top: 10px;
-        width: 100%;
-        height: 40px;
-        position: relative;
-        border: 1px solid hsl(200, 26%, 54%);
-
-        overflow: hidden;
-        border-radius: 5px;
-
-        .input-icon-wrapper {
-            position: absolute;
-            width: 40px;
-            height: 100%;
-            background-color: hsl(202, 86%, 94%);
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            .input-icon {
-                color: hsl(200, 26%, 54%);
-            }
-        }
-
-        input {
-            width: 100%;
-            height: 100%;
-            padding-left: 55px;
-            border: none;
-            outline: none;
-
-            // Removes spinner in Chrome, Safari, and Edge
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        }
-
-        &:hover {
-            border-color: hsl(61, 70%, 52%);
-        }
-
-        &:hover .input-icon-wrapper {
-            background-color: hsl(61, 70%, 52%);
-        }
-
-        &:hover .input-icon {
-            color: black;
-        }
-    }
-}
-
-.mortgage-details {
-    width: 100%;
-
-    display: flex;
-    justify-content: space-between;
-
-    .MortgageTerm,
-    .interestRate {
-        width: 47%;
-
-        label {
-            font-size: 14px;
-            color: hsl(200, 26%, 54%);
-        }
-
-        .MortgageTerm-input-wrapper,
-        .interestRate-input-wrapper {
-            margin-top: 10px;
-            width: 100%;
-            height: 40px;
-            position: relative;
-            border: 1px solid hsl(200, 26%, 54%);
-
-            overflow: hidden;
-            border-radius: 5px;
-
-            .MortgageTerm-input-description,
-            .interestRate-input-description {
-                position: absolute;
-                right: 0;
-                width: 60px;
-                height: 100%;
-                background-color: hsl(202, 86%, 94%);
-                color: hsl(200, 26%, 54%);
-                font-weight: bold;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 14px;
-            }
-
-            input {
-                width: 100%;
-                height: 100%;
-                padding-left: 10px;
-                border: none;
-                outline: none;
-
-                padding-right: 70px;
-                font-weight: bold;
-                // Removes spinner in Chrome, Safari, and Edge
-                &::-webkit-outer-spin-button,
-                &::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0;
-                }
-            }
-        }
-    }
-}
-
-.MortgageType {
-    p {
-        font-size: 14px;
-        color: hsl(200, 26%, 54%);
-    }
-
-    .mortgage-type__option {
-        margin-top: 10px;
-        width: 100%;
-        height: 40px;
-        border: 1px solid hsl(200, 26%, 54%);
-
-        overflow: hidden;
-        border-radius: 5px;
-
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-
-        &:focus-within {
-            border: 1px solid hsl(61, 70%, 52%);
-            background-color: rgb(255, 246, 246);
-        }
-
-        input {
-            margin-left: 10px;
-        }
-
-        span {
-            font-weight: 600;
-        }
-    }
-}
-
 .mortgage-btn {
     width: 70%;
     height: 37px;
@@ -231,4 +74,11 @@ form {
         font-size: 15px;
         font-weight: 600;
     }
+}
+
+small {
+    position: absolute;
+    color: hsl(4, 69%, 50%);
+    font-weight: 600;
+    margin-top: 10px;
 }
