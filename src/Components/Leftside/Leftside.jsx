@@ -4,10 +4,11 @@ import MortgageAmount from "./mortgageAmount/mortgageAmount";
 import MortgageTerm_InterestRate from "./MortgageTerm_InterestRate/MortgageTerm_InterestRate";
 import MortgageType from "./MortgageType/MortgageType";
 
-function Leftside({ isInvalid, setIsInvalid }) {
+function Leftside({ isInvalid, setIsInvalid, showResult, setShowResult }) {
     const handleInputFields = (e) => {
         e.preventDefault();
 
+        let updatedInvalid = { ...isInvalid };
         let radioCheckedStatus = [];
 
         for (let i = 0; i < e.target.length; i++) {
@@ -15,10 +16,7 @@ function Leftside({ isInvalid, setIsInvalid }) {
             const { type, name, value, checked } = input;
 
             if (type === "number") {
-                setIsInvalid((prev) => ({
-                    ...prev,
-                    [name]: value === "" ? false : true,
-                }));
+                updatedInvalid[name] = value !== "";
             }
 
             if (type === "radio") {
@@ -27,13 +25,27 @@ function Leftside({ isInvalid, setIsInvalid }) {
                 let isAnyChecked = radioCheckedStatus.some(
                     (each) => each === true
                 );
-
-                setIsInvalid((prev) => ({
-                    ...prev,
-                    [name]: isAnyChecked,
-                }));
+                updatedInvalid[name] = isAnyChecked;
             }
         }
+
+        setIsInvalid(updatedInvalid);
+        handler_show_result(updatedInvalid);
+    };
+
+    const handler_show_result = (updatedInvalid) => {
+        let finallResult = false;
+
+        for (let each in updatedInvalid) {
+            if (!updatedInvalid[each]) {
+                finallResult = false;
+                break;
+            } else {
+                finallResult = true;
+            }
+        }
+
+        setShowResult(finallResult);
     };
 
     return (
