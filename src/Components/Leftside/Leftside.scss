@@ -11,7 +11,7 @@
         height: 93%;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow: auto;
     }
 }
 
@@ -52,7 +52,7 @@ form {
 
 .mortgage-btn {
     width: 70%;
-    height: 37px;
+    min-height: 37px;
 
     background-color: hsl(61, 70%, 52%);
 
@@ -61,6 +61,7 @@ form {
     align-items: center;
     border-radius: 20px;
     gap: 5px;
+    margin-top: 10px;
 
     border: none;
     outline: none;
@@ -77,8 +78,8 @@ form {
 }
 
 small {
-    position: absolute;
+    display: block;
     color: hsl(4, 69%, 50%);
     font-weight: 600;
-    margin-top: 10px;
+    margin: 5px 0 10px 0px;
 }
