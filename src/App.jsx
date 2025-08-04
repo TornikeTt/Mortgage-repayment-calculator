@@ -10,6 +10,7 @@ function App() {
         height: "min(95%, 450px)",
     });
     const [showResult, setShowResult] = useState(false);
+    const [calculatedValues, setCalculatedValues] = useState([0, 0]);
 
     const [isInvalid, setIsInvalid] = useState({
         MortgageAmount: true,
@@ -61,8 +62,13 @@ function App() {
                     setContainerHeight={setContainerHeight}
                     showResult={showResult}
                     setShowResult={setShowResult}
+                    setCalculatedValues={setCalculatedValues}
                 />
-                <Rightside isInvalid={isInvalid} showResult={showResult} />
+                <Rightside
+                    isInvalid={isInvalid}
+                    showResult={showResult}
+                    calculatedValues={calculatedValues}
+                />
             </main>
         </div>
     );

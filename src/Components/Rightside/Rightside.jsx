@@ -1,7 +1,7 @@
 import illustrantionEmpty from "../../assets/images/illustration-empty.svg";
 import "./Rightside.scss";
 
-function Rightside({ showResult }) {
+function Rightside({ showResult, calculatedValues }) {
     return (
         <div className="rightSide">
             {showResult ? (
@@ -18,7 +18,9 @@ function Rightside({ showResult }) {
                             <p className="monthly-label">
                                 Your monthly repayments
                             </p>
-                            <p className="monthly-amount">£1,797.74</p>
+                            <p className="monthly-amount">
+                                {calculatedValues[0]}
+                            </p>
                         </div>
 
                         <hr />
@@ -27,7 +29,9 @@ function Rightside({ showResult }) {
                             <p className="total-label">
                                 Total you'll repay over the term
                             </p>
-                            <p className="total-amount">£539,322.94</p>
+                            <p className="total-amount">
+                                {calculatedValues[1]}
+                            </p>
                         </div>
                     </div>
                 </section>

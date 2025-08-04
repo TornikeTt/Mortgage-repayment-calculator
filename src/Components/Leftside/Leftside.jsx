@@ -4,7 +4,15 @@ import MortgageAmount from "./mortgageAmount/mortgageAmount";
 import MortgageTerm_InterestRate from "./MortgageTerm_InterestRate/MortgageTerm_InterestRate";
 import MortgageType from "./MortgageType/MortgageType";
 
-function Leftside({ isInvalid, setIsInvalid, showResult, setShowResult }) {
+function Leftside(props) {
+    const {
+        isInvalid,
+        setIsInvalid,
+        showResult,
+        setShowResult,
+        setCalculatedValues,
+    } = props;
+
     const handleInputFields = (e) => {
         e.preventDefault();
 
@@ -30,10 +38,10 @@ function Leftside({ isInvalid, setIsInvalid, showResult, setShowResult }) {
         }
 
         setIsInvalid(updatedInvalid);
-        handler_show_result(updatedInvalid);
+        handler_show_result(updatedInvalid, e);
     };
 
-    const handler_show_result = (updatedInvalid) => {
+    const handler_show_result = (updatedInvalid, e) => {
         let finallResult = false;
 
         for (let each in updatedInvalid) {
@@ -46,6 +54,46 @@ function Leftside({ isInvalid, setIsInvalid, showResult, setShowResult }) {
         }
 
         setShowResult(finallResult);
+        if (finallResult) {
+            calculateRepaymentMortgage(e);
+        }
+    };
+
+    const calculateRepaymentMortgage = (e) => {
+        const formData = new FormData(e.target);
+        const mortgageAmount = parseFloat(formData.get("MortgageAmount"));
+        const mortgageTermYears = parseFloat(formData.get("MortgageTerm"));
+        const annualInterestRate = parseFloat(formData.get("InterestRate"));
+        const mortgageType = formData.get("MortgageType").toLowerCase();
+
+        const monthlyInterestRate = annualInterestRate / 100 / 12;
+        const totalPayments = mortgageTermYears * 12;
+
+        let monthlyPayment = 0;
+        let totalRepayment = 0;
+
+        if (mortgageType === "repayment") {
+            const compoundFactor = Math.pow(
+                1 + monthlyInterestRate,
+                totalPayments
+            );
+            monthlyPayment =
+                (mortgageAmount * monthlyInterestRate * compoundFactor) /
+                (compoundFactor - 1);
+
+            totalRepayment = monthlyPayment * totalPayments;
+        } else if (mortgageType === "interest-only") {
+            monthlyPayment = mortgageAmount * monthlyInterestRate;
+            totalRepayment = monthlyPayment * totalPayments;
+        } else {
+            console.error("Unknown mortgage type");
+            return;
+        }
+
+        setCalculatedValues([
+            monthlyPayment.toFixed(2),
+            totalRepayment.toFixed(2),
+        ]);
     };
 
     return (
