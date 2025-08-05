@@ -1,14 +1,14 @@
 import { FaPoundSign } from "react-icons/fa";
 import "./MortgageAmount.scss";
 
-function MortgageAmount({ MortgageAmount_input_status }) {
+function MortgageAmount({ inputValidation, set_inputValidation }) {
     return (
         <div className="mortgageAmount-container">
             <label htmlFor="mortgageAmount-input">Mortgage Amount</label>
 
             <div
                 className={`mortgageAmount-input-wrapper ${
-                    !MortgageAmount_input_status ? "error" : ""
+                    !inputValidation.MortgageAmount.isValid ? "error" : ""
                 }`}
             >
                 <div className="input-icon-wrapper">
@@ -20,7 +20,7 @@ function MortgageAmount({ MortgageAmount_input_status }) {
                     name="MortgageAmount"
                 />
             </div>
-            {!MortgageAmount_input_status && (
+            {!inputValidation.MortgageAmount.isValid && (
                 <small>This field is required</small>
             )}
         </div>

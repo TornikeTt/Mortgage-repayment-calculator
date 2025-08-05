@@ -6,9 +6,8 @@ import MortgageType from "./MortgageType/MortgageType";
 
 function Leftside(props) {
     const {
-        isInvalid,
-        setIsInvalid,
-        showResult,
+        inputValidation,
+        set_inputValidation,
         setShowResult,
         setCalculatedValues,
     } = props;
@@ -16,36 +15,43 @@ function Leftside(props) {
     const handleInputFields = (e) => {
         e.preventDefault();
 
-        let updatedInvalid = { ...isInvalid };
-        let radioCheckedStatus = [];
+        let updatedFormState = { ...inputValidation };
+        let radioCheckedisValid = [];
 
         for (let i = 0; i < e.target.length; i++) {
             const input = e.target[i];
             const { type, name, value, checked } = input;
 
             if (type === "number") {
-                updatedInvalid[name] = value !== "";
+                updatedFormState[name] = {
+                    isValid: value !== "",
+                    value: value,
+                };
             }
 
             if (type === "radio") {
-                radioCheckedStatus.push(checked);
+                radioCheckedisValid.push(checked);
 
-                let isAnyChecked = radioCheckedStatus.some(
+                let isAnyChecked = radioCheckedisValid.some(
                     (each) => each === true
                 );
-                updatedInvalid[name] = isAnyChecked;
+
+                updatedFormState[name] = {
+                    isValid: isAnyChecked,
+                    value: isAnyChecked ? value : "",
+                };
             }
         }
 
-        setIsInvalid(updatedInvalid);
-        handler_show_result(updatedInvalid, e);
+        set_inputValidation(updatedFormState);
+        handler_show_result(updatedFormState, e);
     };
 
-    const handler_show_result = (updatedInvalid, e) => {
+    const handler_show_result = (updatedFormState, e) => {
         let finallResult = false;
 
-        for (let each in updatedInvalid) {
-            if (!updatedInvalid[each]) {
+        for (let each in updatedFormState) {
+            if (!updatedFormState[each].isValid) {
                 finallResult = false;
                 break;
             } else {
@@ -54,6 +60,7 @@ function Leftside(props) {
         }
 
         setShowResult(finallResult);
+
         if (finallResult) {
             calculateRepaymentMortgage(e);
         }
@@ -96,26 +103,37 @@ function Leftside(props) {
         ]);
     };
 
+    const clearAll = () => {
+        set_inputValidation({
+            MortgageAmount: { isValid: true, value: "" },
+            MortgageTerm: { isValid: true, value: "" },
+            InterestRate: { isValid: true, value: "" },
+            MortgageType: { isValid: true, value: "" },
+        });
+    };
+
     return (
         <div className="leftSide">
             <div className="calculator-wrapper">
                 <div className="calculator-header">
                     <h1 className="calculator-title">Mortgage Calculator</h1>
-                    <button className="clear-button">
+                    <button onClick={clearAll} className="clear-button">
                         <span>Clear All</span>
                     </button>
                 </div>
 
                 <form onSubmit={handleInputFields}>
                     <MortgageAmount
-                        MortgageAmount_input_status={isInvalid.MortgageAmount}
+                        inputValidation={inputValidation}
+                        set_inputValidation={set_inputValidation}
                     />
                     <MortgageTerm_InterestRate
-                        MortgageTerm_input_status={isInvalid.MortgageTerm}
-                        InterestRate_input_status={isInvalid.InterestRate}
+                        inputValidation={inputValidation}
+                        set_inputValidation={set_inputValidation}
                     />
                     <MortgageType
-                        MortgageType_input_status={isInvalid.MortgageType}
+                        inputValidation={inputValidation}
+                        set_inputValidation={set_inputValidation}
                     />
 
                     <button className="mortgage-btn">

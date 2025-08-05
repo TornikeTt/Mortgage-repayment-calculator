@@ -12,11 +12,11 @@ function App() {
     const [showResult, setShowResult] = useState(false);
     const [calculatedValues, setCalculatedValues] = useState([0, 0]);
 
-    const [isInvalid, setIsInvalid] = useState({
-        MortgageAmount: true,
-        MortgageTerm: true,
-        InterestRate: true,
-        MortgageType: true,
+    const [inputValidation, set_inputValidation] = useState({
+        MortgageAmount: { isValid: true, value: "" },
+        MortgageTerm: { isValid: true, value: "" },
+        InterestRate: { isValid: true, value: "" },
+        MortgageType: { isValid: true, value: "" },
     });
 
     useEffect(() => {
@@ -29,8 +29,8 @@ function App() {
     useEffect(() => {
         let false_value_counter = 0;
 
-        for (let each in isInvalid) {
-            if (!isInvalid[each]) {
+        for (let each in inputValidation) {
+            if (!inputValidation[each].isValid) {
                 false_value_counter++;
             }
         }
@@ -51,21 +51,19 @@ function App() {
                     ? `min(95%, ${450 + false_value_counter * 25}px)`
                     : `min(95%, ${520 + false_value_counter * 25}px)`,
         });
-    }, [isInvalid, width]);
+    }, [inputValidation, width]);
 
     return (
         <div className="container">
             <main style={containerHeight}>
                 <Leftside
-                    isInvalid={isInvalid}
-                    setIsInvalid={setIsInvalid}
-                    setContainerHeight={setContainerHeight}
-                    showResult={showResult}
+                    inputValidation={inputValidation}
+                    set_inputValidation={set_inputValidation}
                     setShowResult={setShowResult}
                     setCalculatedValues={setCalculatedValues}
                 />
+
                 <Rightside
-                    isInvalid={isInvalid}
                     showResult={showResult}
                     calculatedValues={calculatedValues}
                 />

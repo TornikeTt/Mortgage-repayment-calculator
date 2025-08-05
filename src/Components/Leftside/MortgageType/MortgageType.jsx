@@ -1,6 +1,6 @@
 import "./MortgageType.scss";
 
-function MortgageType({ MortgageType_input_status }) {
+function MortgageType({ inputValidation, set_inputValidation }) {
     return (
         <div className="MortgageType-container">
             <p>Mortgage Type</p>
@@ -14,7 +14,7 @@ function MortgageType({ MortgageType_input_status }) {
                 <span>Interest Only</span>
             </label>
 
-            {!MortgageType_input_status && (
+            {!inputValidation.MortgageType.isValid && (
                 <small>This field is required</small>
             )}
         </div>

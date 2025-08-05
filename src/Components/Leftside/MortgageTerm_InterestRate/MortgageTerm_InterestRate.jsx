@@ -1,9 +1,6 @@
 import "./MortgageTerm_InterestRate.scss";
 
-function MortgageTerm_InterestRate({
-    MortgageTerm_input_status,
-    InterestRate_input_status,
-}) {
+function MortgageTerm_InterestRate({ inputValidation, set_inputValidation }) {
     return (
         <div className="MortgageTerm_InterestRate-container">
             <div className="MortgageTerm-wrapper">
@@ -11,7 +8,7 @@ function MortgageTerm_InterestRate({
 
                 <div
                     className={`input-wrapper ${
-                        !MortgageTerm_input_status ? "error" : ""
+                        !inputValidation.MortgageTerm.isValid ? "error" : ""
                     }`}
                 >
                     <div className="input-description">
@@ -24,7 +21,7 @@ function MortgageTerm_InterestRate({
                     />
                 </div>
 
-                {!MortgageTerm_input_status && (
+                {!inputValidation.MortgageTerm.isValid && (
                     <small>This field is required</small>
                 )}
             </div>
@@ -34,7 +31,7 @@ function MortgageTerm_InterestRate({
 
                 <div
                     className={`input-wrapper ${
-                        !InterestRate_input_status ? "error" : ""
+                        !inputValidation.InterestRate.isValid ? "error" : ""
                     }`}
                 >
                     <div className="input-description">
@@ -47,7 +44,7 @@ function MortgageTerm_InterestRate({
                     />
                 </div>
 
-                {!InterestRate_input_status && (
+                {!inputValidation.InterestRate.isValid && (
                     <small>This field is required</small>
                 )}
             </div>
