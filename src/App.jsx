@@ -6,9 +6,10 @@ import "./Mobile.scss";
 
 function App() {
     const [width, setWidth] = useState(window.innerWidth);
-    const [containerHeight, setContainerHeight] = useState({
+    const [height, setHeight] = useState({
         height: "min(95%, 450px)",
     });
+
     const [showResult, setShowResult] = useState(false);
     const [calculatedValues, setCalculatedValues] = useState([0, 0]);
 
@@ -27,35 +28,45 @@ function App() {
     }, []);
 
     useEffect(() => {
-        let false_value_counter = 0;
+        let invalidInputCount = 0;
 
-        for (let each in inputValidation) {
-            if (!inputValidation[each].isValid) {
-                false_value_counter++;
+        for (let field in inputValidation) {
+            if (!inputValidation[field].isValid) {
+                invalidInputCount++;
             }
         }
+
         /*
             We adjust the height of the <main> tag based on how many input fields are invalid.
             For each invalid input, we add 25px to make room for error messages.
 
             If the screen width is greater than 600px:
-                - Start height is 450px.
-            If the screen width is 600px or less:
-                - Start height is 520px to better accommodate the vertical layout on smaller screens.
+                - Base height is 450px.
+            If the screen width is less than 400px:
+                - Base height is 950px to accommodate mobile layout.
+            Otherwise (between 400px and 600px):
+                - Base height is 520px.
 
-            This helps ensure the layout displays correctly without elements overlapping or being cut off.
+            This ensures proper layout and prevents elements from being cut off.
         */
-        setContainerHeight({
-            height:
-                width > 600
-                    ? `min(95%, ${450 + false_value_counter * 25}px)`
-                    : `min(95%, ${520 + false_value_counter * 25}px)`,
+        let calculatedHeight = null;
+
+        if (width > 600) {
+            calculatedHeight = `min(95%, ${450 + invalidInputCount * 25}px)`;
+        } else if (width < 400) {
+            calculatedHeight = `min(95%, ${950 + invalidInputCount * 25}px)`;
+        } else {
+            calculatedHeight = `min(95%, ${520 + invalidInputCount * 25}px)`;
+        }
+
+        setHeight({
+            height: calculatedHeight,
         });
     }, [inputValidation, width]);
 
     return (
         <div className="container">
-            <main style={containerHeight}>
+            <main style={height}>
                 <Leftside
                     inputValidation={inputValidation}
                     set_inputValidation={set_inputValidation}
