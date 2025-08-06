@@ -1,6 +1,6 @@
 import "./MortgageTerm_InterestRate.scss";
 
-function MortgageTerm_InterestRate({ inputValidation, set_inputValidation }) {
+function MortgageTerm_InterestRate({ inputValidation, collectValues }) {
     return (
         <div className="MortgageTerm_InterestRate-container">
             <div className="MortgageTerm-wrapper">
@@ -18,6 +18,8 @@ function MortgageTerm_InterestRate({ inputValidation, set_inputValidation }) {
                         id="MortgageTerm-input"
                         type="number"
                         name="MortgageTerm"
+                        value={inputValidation.MortgageTerm.value}
+                        onChange={(e) => collectValues(e)}
                     />
                 </div>
 
@@ -41,6 +43,8 @@ function MortgageTerm_InterestRate({ inputValidation, set_inputValidation }) {
                         id="InterestRate-input"
                         type="number"
                         name="InterestRate"
+                        value={inputValidation.InterestRate.value}
+                        onChange={(e) => collectValues(e)}
                     />
                 </div>
 

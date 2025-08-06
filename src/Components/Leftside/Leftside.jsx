@@ -3,6 +3,7 @@ import "./Leftside.scss";
 import MortgageAmount from "./mortgageAmount/mortgageAmount";
 import MortgageTerm_InterestRate from "./MortgageTerm_InterestRate/MortgageTerm_InterestRate";
 import MortgageType from "./MortgageType/MortgageType";
+import { useRef } from "react";
 
 function Leftside(props) {
     const {
@@ -11,6 +12,9 @@ function Leftside(props) {
         setShowResult,
         setCalculatedValues,
     } = props;
+
+    let Repayment_Radio_button = useRef(null);
+    let Interestonly_Radio_button = useRef(null);
 
     const handleInputFields = (e) => {
         e.preventDefault();
@@ -89,7 +93,7 @@ function Leftside(props) {
                 (compoundFactor - 1);
 
             totalRepayment = monthlyPayment * totalPayments;
-        } else if (mortgageType === "interest-only") {
+        } else if (mortgageType === "interestonly") {
             monthlyPayment = mortgageAmount * monthlyInterestRate;
             totalRepayment = monthlyPayment * totalPayments;
         } else {
@@ -103,6 +107,17 @@ function Leftside(props) {
         ]);
     };
 
+    const collectValues = (e) => {
+        const { name, value } = e.target;
+        set_inputValidation((prevState) => ({
+            ...prevState,
+            [name]: {
+                ...prevState[name],
+                value: value,
+            },
+        }));
+    };
+
     const clearAll = () => {
         set_inputValidation({
             MortgageAmount: { isValid: true, value: "" },
@@ -110,6 +125,12 @@ function Leftside(props) {
             InterestRate: { isValid: true, value: "" },
             MortgageType: { isValid: true, value: "" },
         });
+
+        Repayment_Radio_button.current.checked = false;
+        Interestonly_Radio_button.current.checked = false;
+
+        setShowResult(false);
+        setCalculatedValues([0, 0]);
     };
 
     return (
@@ -125,15 +146,16 @@ function Leftside(props) {
                 <form onSubmit={handleInputFields}>
                     <MortgageAmount
                         inputValidation={inputValidation}
-                        set_inputValidation={set_inputValidation}
+                        collectValues={collectValues}
                     />
                     <MortgageTerm_InterestRate
                         inputValidation={inputValidation}
-                        set_inputValidation={set_inputValidation}
+                        collectValues={collectValues}
                     />
                     <MortgageType
                         inputValidation={inputValidation}
-                        set_inputValidation={set_inputValidation}
+                        Repayment_Radio_button={Repayment_Radio_button}
+                        Interestonly_Radio_button={Interestonly_Radio_button}
                     />
 
                     <button className="mortgage-btn">

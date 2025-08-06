@@ -1,7 +1,7 @@
 import { FaPoundSign } from "react-icons/fa";
 import "./MortgageAmount.scss";
 
-function MortgageAmount({ inputValidation, set_inputValidation }) {
+function MortgageAmount({ inputValidation, collectValues }) {
     return (
         <div className="mortgageAmount-container">
             <label htmlFor="mortgageAmount-input">Mortgage Amount</label>
@@ -18,6 +18,8 @@ function MortgageAmount({ inputValidation, set_inputValidation }) {
                     id="mortgageAmount-input"
                     type="number"
                     name="MortgageAmount"
+                    value={inputValidation.MortgageAmount.value}
+                    onChange={(e) => collectValues(e)}
                 />
             </div>
             {!inputValidation.MortgageAmount.isValid && (
