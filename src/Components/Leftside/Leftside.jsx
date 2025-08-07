@@ -1,6 +1,6 @@
 import calculator from "../../assets/images/icon-calculator.svg";
 import "./Leftside.scss";
-import MortgageAmount from "./mortgageAmount/mortgageAmount";
+import MortgageAmount from "./MortgageAmount/MortgageAmount";
 import MortgageTerm_InterestRate from "./MortgageTerm_InterestRate/MortgageTerm_InterestRate";
 import MortgageType from "./MortgageType/MortgageType";
 import { useRef } from "react";
